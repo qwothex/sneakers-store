@@ -1,0 +1,17 @@
+.admin_container{
+  padding: 0 20px;
+  place-items: center;
+
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+
+    .checkbox_label{
+      display: flex;
+      align-items: center;
+      line-height: 7px;
+    }
+  }
+}

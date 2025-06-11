@@ -1,0 +1,73 @@
+.customizeAd{
+  width: 70%;
+  max-width: 1000px;
+  aspect-ratio: 6/3;
+  overflow: hidden;
+  align-self: center;
+  position: relative;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 0 25px 25px 25px;
+  font-family: "Bebas Neue", sans-serif;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5));
+  // color: #fff;
+
+  @media(max-width: 900px){
+    width: auto;
+  }
+
+  h2{
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    // font-size: 36px;
+    margin: 0;
+  }
+
+  h3{
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    // font-size: 22px;
+    margin: 0;
+  }
+
+  button{
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: .1s;
+
+    &:hover{
+      scale: 1.1
+    }
+  }
+  
+  img{
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@media (max-width: 450px) {
+  .customizeAd{
+    padding: 10px;
+    aspect-ratio: 5/3;
+
+    button{
+      margin-top: 5px;
+    }
+  }
+}
