@@ -4,7 +4,7 @@ const CustomizeAdvertisement = () => {
   return(
     <div className={s.customizeAd}>
       <img 
-        src='/src/assets/animation.webp' 
+        src='/src/assets/animations/animation.webp' 
       />
       <h2>Your Kicks - Your Canvas.</h2>
       <h3>

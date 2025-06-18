@@ -3,9 +3,9 @@ import s from './footer.module.scss'
 
 const Footer:FC = () => {
   return(
-    <div className={s.footer}>
+    <footer className={s.footer}>
       <h4>NV 2025. All Right Reserved</h4>
-    </div>
+    </footer>
   )
 } 
 

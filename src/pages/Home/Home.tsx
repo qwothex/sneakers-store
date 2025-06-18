@@ -9,8 +9,8 @@ const Home:FC = () => {
 
   return (
     <>
+      <NavBar />
       <div className={s.mainPage}>
-        <NavBar />
         <CustomizeAdvertisement />
         <ProductList />
       </div>

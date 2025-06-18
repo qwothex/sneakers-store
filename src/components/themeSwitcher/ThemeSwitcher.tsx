@@ -1,5 +1,4 @@
 import { useEffect, useState, type FC } from 'react'
-import s from './themeSwitcher.module.scss'
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 
@@ -16,7 +15,7 @@ const ThemeSwitcher:FC = () => {
 
   return (
     <button 
-      className={s.switcher}
+      style={{marginRight: 5}}
       onClick={() => {
         setTheme(theme == 'dark' ? 'light' : 'dark')
       }}

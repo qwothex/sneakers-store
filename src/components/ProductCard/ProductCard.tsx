@@ -1,16 +1,12 @@
-import { useEffect, type FC } from 'react'
+import { type FC } from 'react'
 import s from './productCard.module.scss'
 import type { ProductPreview } from '../../types/productEntry'
-import { useNavigate } from 'react-router'
-import { price } from '../../utils/discountedPrice'
+import { useNavigate } from 'react-router-dom'
+import Price from '../Price/Price'
 
 const ProductCard:FC<{product: ProductPreview}> = ({product}) => {
 
   const navigate = useNavigate()
-
-  useEffect(() => {
-    console.log(product)
-  }, [])
 
   return(
     <div className={s.productCard}>
@@ -35,13 +31,9 @@ const ProductCard:FC<{product: ProductPreview}> = ({product}) => {
       </div>
 
       <div className={s.overlay} />
-      <img src={product.thumbnail} />
+      <img src={product.thumbnail} loading='lazy' />
 
-
-      <h3 className={product.discount ? s.discountedPrice : s.price}>
-        {price(product.price, product.discount || null)}
-      </h3>
-
+      <Price price={product.price} discount={product.discount || null} includeOriginalPriceText={true} />
 
       <h2>{product.name}</h2>
       <h5>{product.manufacturer}</h5>

@@ -2,7 +2,7 @@ import s from './productsList .module.scss'
 import ProductCard from '../ProductCard/ProductCard'
 import { supabase } from '../../utils/supabase'
 import { useQuery } from '@tanstack/react-query'
-import { useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 import ProductCardLoader from '../ProductCard/ProductCardLoader';
 
   const pageSize = 9;

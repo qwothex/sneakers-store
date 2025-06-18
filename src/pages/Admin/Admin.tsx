@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC, type FormEvent } from 'react'
+import { useState, type FC, type FormEvent } from 'react'
 import s from './admin.module.scss'
 import type { Filters } from '../../types/productEntry'
 import NavBar from '../../components/Navbar/NavBar'
@@ -23,21 +23,11 @@ const Admin:FC = () => {
       .from("models")
       .upload(modelPath, model!)
 
-    if(data){
-      console.log(data.path)
-    }
-
     if(error){
       console.log('error while uploading model: ' + error)
     }
 
-    const { data: urlData } = supabase.storage
-      .from('product-images')
-      .getPublicUrl(modelPath)
-
-    console.log('public url of model: ' + urlData.publicUrl)
-
-    return urlData?.publicUrl ?? null;
+    return modelPath
 
   }
 
@@ -143,28 +133,30 @@ const Admin:FC = () => {
         <label>
           Tags:
         </label>
-        {mainFilters.map((attr) => {
-          const isSelected = filters.includes(attr);
-          return (
-            <button type='button'
-              key={attr}
-              onClick={() => {
-                setFilters((prev) =>
-                  isSelected
-                    ? prev.filter((a) => a !== attr)
-                    : [...prev, attr]
-                );
-              }}
-              style={{
-                backgroundColor: isSelected ? '#333' : '#eee',
-                color: isSelected ? 'white' : 'black',
-                marginRight: '8px'
-              }}
-            >
-              {attr}
-            </button>
-          );
-        })}
+        <div>
+          {mainFilters.map((attr) => {
+            const isSelected = filters.includes(attr);
+            return (
+              <button type='button'
+                key={attr}
+                onClick={() => {
+                  setFilters((prev) =>
+                    isSelected
+                      ? prev.filter((a) => a !== attr)
+                      : [...prev, attr]
+                  );
+                }}
+                style={{
+                  backgroundColor: isSelected ? '#333' : '#eee',
+                  color: isSelected ? 'white' : 'black',
+                  marginRight: '8px'
+                }}
+              >
+                {attr}
+              </button>
+            );
+          })}
+        </div>
         <label htmlFor='model'>
           model:
         </label>

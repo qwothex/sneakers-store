@@ -1,11 +1,14 @@
-import { Canvas, useLoader, useThree } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Canvas, useLoader } from '@react-three/fiber'
+import { OrbitControls, PerspectiveCamera, PresentationControls } from '@react-three/drei'
 import { Sneaker } from '../Sneakers'
-import { useEffect, useRef, useState, type FC } from 'react'
+import { useState, type FC } from 'react'
 import * as THREE from 'three'
 import { SketchPicker } from 'react-color'
-import { useParams } from 'react-router'
-import { productsList } from '../../constants/mochSneakersData'
+import { useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { supabase } from '../../utils/supabase'
+import LoadingScreen from '../../pages/Loading/LoadingScreen'
+// import { productsList } from '../../constants/mochSneakersData'
 
 const CustomizeSneakers:FC = () => {
 
@@ -42,13 +45,50 @@ const CustomizeSneakers:FC = () => {
     //   )
     // }
 
+    const getModelUrl = async() => {
+      const { data, error } = await supabase.from('products')
+        .select("model_url")
+        .eq("id", +id!)
+        .single()
+      
+        if(error){
+          console.log(error)
+        }
+
+        if(data){
+          console.log(data.model_url)
+
+          const { data: urlData } = await supabase.storage
+            .from('models')
+            .createSignedUrl(data.model_url, 300);
+
+          console.log('public url of model: ' + urlData?.signedUrl)
+
+          return urlData?.signedUrl ?? null;
+        }
+    }
+
+    const { data, isLoading, isError } = useQuery({
+      queryKey: ['customProduct', id],
+      queryFn: () => getModelUrl(),
+      staleTime: 1000 * 60 * 5
+    })
+
+    if(isError){
+      console.log('error while requesting model url')
+    }
+
+    if(isLoading){
+      return <LoadingScreen />
+    }
+
     return (
       <>
         <Canvas
           gl={{ powerPreference: 'high-performance' }}
 
           scene={{
-            background: useLoader(THREE.TextureLoader, '/src/assets/environment.jpg'),
+            background: useLoader(THREE.TextureLoader, '/src/assets/images/environment.jpg'),
           }}
 
           style={{
@@ -67,7 +107,8 @@ const CustomizeSneakers:FC = () => {
           <directionalLight position={[0, 1, 3]} intensity={2} />
           {/* <DirectionalLightWithHelper /> */}
 
-          <Sneaker modelUrl={productsList[+id! - 1].modelUrl} selectedPart={selectedPart} setSelectedPart={setSelectedPart} setColors={setColors} colors={colors} />
+          <Sneaker modelUrl={data!} selectedPart={selectedPart} setSelectedPart={setSelectedPart} setColors={setColors} colors={colors} />
+
           <mesh position={[0,-3,0]}>
           <boxGeometry args={[4,5,4]} />
           <meshStandardMaterial />

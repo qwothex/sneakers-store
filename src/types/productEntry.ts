@@ -18,10 +18,11 @@ export type Product = {
   id: number,
   name: String,
   manufacturer: string,
-  thumbnail: string, //link
+  images: string, //link
   modelUrl?: string //link,
+  customizable: boolean,
   discount?: number,
   price: number, //USD
   sizes: number[],
-  filters: typeof mainFilters[number][]
+  filters: Filters[]
 }

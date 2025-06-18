@@ -549,7 +549,7 @@ export function Sneaker(props: SneakerProps) {
     }
   })
     
-  return (
+  return ( 
     <group {...props} ref={groupRef} >
       {Object.entries(parts).map(([name, mesh]) => (
         <primitive 
@@ -568,57 +568,5 @@ export function Sneaker(props: SneakerProps) {
         />
       ))}
     </group>
-    // <group {...props} ref={groupRef} dispose={null}>
-    //   <mesh
-    //     name="Object_4001"
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.Object_4001.geometry}
-    //     material={materials.Main}
-    //     position={[1.621, 0.938, 0]}
-    //     rotation={[-Math.PI, 0, -Math.PI]}
-    //   />
-    //   <mesh
-    //     onClick={(e) => {
-    //       e.stopPropagation()
-    //       props.setSelectedPart('base')
-    //     }}
-    //     name="base"
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.base.geometry}
-    //     material={materials.primaryMaterial}
-    //     position={[1.621, 0.938, 0]}
-    //     rotation={[-Math.PI, 0, -Math.PI]}
-    //   />
-    //   <mesh
-    //     onClick={(e) => {
-    //       e.stopPropagation()
-    //       props.setSelectedPart('secondaryBase')
-    //     }}
-    //     name="secondaryBase"
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.secondaryBase.geometry}
-    //     material={materials.secondaryMaterial}
-    //     position={[1.621, 0.938, 0]}
-    //     rotation={[-Math.PI, 0, -Math.PI]}
-    //   />
-    //   <mesh
-    //     onClick={(e) => {
-    //       e.stopPropagation()
-    //       props.setSelectedPart('sole')
-    //     }}
-    //     name="sole"
-    //     castShadow
-    //     receiveShadow
-    //     geometry={nodes.sole.geometry}
-    //     material={materials.soleMaterial}
-    //     position={[1.621, 0.938, 0]}
-    //     rotation={[-Math.PI, 0, -Math.PI]}
-    //   />
-    // </group>
   )
 }
-
-// useGLTF.preload('/jordansDRACO.glb')
