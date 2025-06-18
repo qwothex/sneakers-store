@@ -7,7 +7,7 @@ const RouterErrorPage:FC = () => {
   return <div className={s.error_container}>
       <div className={s.animation_container}>
         <DotLottieReact
-          src="/src/assets/animations/error.lottie"
+          src="/error.lottie"
           loop
           autoplay
         />

@@ -1,10 +1,12 @@
 import s from './customizeAdvertisement.module.scss'
+import animation from '../../assets/animations/animation.webp'
 
 const CustomizeAdvertisement = () => {
   return(
     <div className={s.customizeAd}>
       <img 
-        src='/src/assets/animations/animation.webp' 
+        src={animation} 
+        alt='animation'
       />
       <h2>Your Kicks - Your Canvas.</h2>
       <h3>

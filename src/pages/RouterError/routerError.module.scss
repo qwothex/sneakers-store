@@ -8,9 +8,10 @@
   flex-direction: column;
   place-items: center center;
   background-color: #fff;
+  overflow: hidden;
 
   .animation_container{
-    width: 50%;
+    width: 500px;
     aspect-ratio: 1;
   }
 

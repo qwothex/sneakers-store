@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '../../utils/supabase'
 import LoadingScreen from '../../pages/Loading/LoadingScreen'
+import background from '../../assets/images/environment.jpg'
 // import { productsList } from '../../constants/mochSneakersData'
 
 const CustomizeSneakers:FC = () => {
@@ -88,7 +89,7 @@ const CustomizeSneakers:FC = () => {
           gl={{ powerPreference: 'high-performance' }}
 
           scene={{
-            background: useLoader(THREE.TextureLoader, '/src/assets/images/environment.jpg'),
+            background: useLoader(THREE.TextureLoader, background),
           }}
 
           style={{

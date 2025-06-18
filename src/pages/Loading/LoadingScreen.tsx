@@ -7,7 +7,7 @@ const LoadingScreen:FC = () => {
     <div className={s.loadingScreen}>
       <div className={s.anim_container}>
         <DotLottieReact
-          src="/src/assets/animations/loading.lottie"
+          src="/loading.lottie"
           loop
           autoplay
         />
