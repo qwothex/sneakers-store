@@ -1,5 +1,5 @@
 import { Canvas, useLoader } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, PresentationControls } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Sneaker } from '../Sneakers'
 import { useState, type FC } from 'react'
 import * as THREE from 'three'

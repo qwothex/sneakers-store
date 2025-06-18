@@ -19,7 +19,7 @@ const Admin:FC = () => {
     
     const modelPath = `${Date.now()}${model!.name}`
 
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from("models")
       .upload(modelPath, model!)
 
@@ -36,7 +36,7 @@ const Admin:FC = () => {
     const uploads = images.map(async(image) => {
       const imagePath = `${Date.now()}-${image.name}`
 
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from('product-images')
         .upload(imagePath, image)
 

@@ -2,7 +2,7 @@ import s from './productsList .module.scss'
 import ProductCard from '../ProductCard/ProductCard'
 import { supabase } from '../../utils/supabase'
 import { useQuery } from '@tanstack/react-query'
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import ProductCardLoader from '../ProductCard/ProductCardLoader';
 
   const pageSize = 9;
@@ -23,16 +23,16 @@ import ProductCardLoader from '../ProductCard/ProductCardLoader';
 
 const ProductList = () => {
 
-  const [searchParams, setSearchParams] = useSearchParams()
-  const page = parseInt(searchParams.get('page') || '1')
+  // const [searchParams, setSearchParams] = useSearchParams()
+  // const page = parseInt(searchParams.get('page') || '1')
 
-  const goToPage = (page: number) => {
-    setSearchParams({ page: String(page)})
-  }
+  // const goToPage = (page: number) => {
+  //   setSearchParams({ page: String(page)})
+  // }
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['products', page],
-    queryFn: () => fetchProducts(page),
+    queryKey: ['products', 1],
+    queryFn: () => fetchProducts(1),
     staleTime: 1000 * 60 * 5
   })
 
