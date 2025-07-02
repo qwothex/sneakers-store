@@ -1,0 +1,117 @@
+$mainColor: #fff;
+
+.form_title{
+  text-align: center;
+}
+
+.form {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  // border: 2px solid $mainColor;
+  box-shadow: 0 0 3px 3px rgba($color: #fff, $alpha: 0.6);
+  border-radius: 12px;
+  backdrop-filter: blur(1px);
+  box-sizing: border-box;
+
+  label{
+    color: $mainColor;
+  }
+
+  input[type=email], input[type=password], input[type=text] {
+    height: 30px;
+    border-radius: 8px;
+    background-color: transparent;
+    transition: .1s;
+    margin-bottom: 10px;
+    border-color: $mainColor;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    padding-left: 5px;
+
+    &:focus{
+      outline: none;
+      scale: 1.02;
+    }
+
+  }
+
+  .agreement_container{
+
+    display: flex;
+    align-items: center;
+
+    white-space: pre;
+
+    input[type=checkbox]{
+      display: none;
+
+      &:checked ~ .checkbox_label {
+        background-color: rgb(76, 189, 76);
+      }
+    }
+
+    .checkbox_label{
+      display: block;
+      width: 15px;
+      height: 15px;
+      background-color: transparent;
+      border: 1px solid $mainColor;
+      border-radius: 4px;
+      margin-right: 5px;
+      color: $mainColor;
+      font-size: 12px;
+      transition: .15s;
+    }
+
+    span{
+      color: $mainColor;
+      font-size: 12px;
+
+    }
+
+  }
+
+  button[type=submit]{
+    margin: 10px 0;
+    width: 90px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: transparent;
+    border-color: $mainColor;
+    color: $mainColor;
+    align-self: flex-end;
+    font-size: 18px;
+    transition: .1s;
+
+    &:hover{
+      scale: 1.05;
+    }
+  }
+
+  span{
+    color: $mainColor;
+    font-size: 14px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    white-space: pre;
+
+    span {
+
+      span {
+        color: rgb(73, 12, 111);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    min-width: 300px;
+  }
+
+}

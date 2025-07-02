@@ -4,7 +4,7 @@ import NavBar from "../../components/Navbar/NavBar"
 import s from './productPage.module.scss'
 import { supabase } from "../../utils/supabase"
 import { useQuery } from "@tanstack/react-query"
-import type { Product } from "../../types/productEntry"
+import type { Product } from "../../types/product"
 import Price from "../../components/Price/Price"
 import ErrorPage from "../ErrorPage/ErrorPage"
 import { priceWithDiscount } from "../../utils/priceWithDiscount"
@@ -47,6 +47,10 @@ const ProductPage:FC = () => {
     return <LoadingScreen />
   }
 
+  if(!product){
+    return <ErrorPage message={'Product is missing'} />
+  }
+
   return(
 		<>
       <NavBar />
@@ -54,37 +58,38 @@ const ProductPage:FC = () => {
       <main className={s.productPage}>
 
         <div className={s.image_container}>
-          <img src={product?.images[0]} loading="lazy" alt="product image" />
+          <img src={product.images[0]} loading="lazy" alt="product image" />
         </div>
 
         <section className={s.data}>
 
           <div className={s.data_header}>
-            <h1>{product!.name}</h1>
+            <h1>{product.name}</h1>
 
             {product?.customizable && <div className={s.customizable_title_container}>
                 <span className={s.customizable_title}>CUSTOMIZABLE</span>
             </div>}
 
-            <Link to={'/'} className={s.more}>more from {product!.manufacturer}</Link>
+            <Link to={'/'} className={s.more}>more from {product.manufacturer}</Link>
+            <Link to={'/'} className={s.more}>more from {product.seller_username}</Link>
 
             <ul className={s.filters}>
-              {product?.filters.map(el => <li key={el}>{el}</li>)}
+              {product.filters.map(el => <li key={el}>{el}</li>)}
             </ul>
           </div>
 
           <div className={s.price_container}>
-            <Price price={product!.price} discount={product?.discount || null} />
-            {product?.discount && <span className={s.originalPrice}>{product.price}$</span>}
+            <Price price={product.price} discount={product.discount || null} />
+            {product.discount && <span className={s.originalPrice}>{product.price}$</span>}
             <p className={s.interestFree}>
               or 4 interest-free payments of {
-              !product?.discount 
-                ? (product!.price / 4).toString()
+              !product.discount 
+                ? (product.price / 4).toString()
                 : (priceWithDiscount(product.price, product.discount) / 4).toString()}$
             </p>
           </div>
 
-          {product?.customizable && <button className={s.customizeButton} onClick={() => navigate('custom', {replace: false})}>customize</button>}
+          {product.customizable && <button className={s.customizeButton} onClick={() => navigate('custom', {replace: false})}>customize</button>}
 
           <select id='selectSize' onChange={() => setSizeType(sizeType == 'EU' ? 'US' : 'EU')}>
             <option value='EU'>
@@ -98,8 +103,8 @@ const ProductPage:FC = () => {
           <p style={{margin: 5}}>select a size</p>
 
           <div className={s.sizes}>
-              {product?.sizes 
-                && product?.sizes.map((el) => (
+              {product.sizes 
+                && product.sizes.map((el) => (
                   <button 
                     key={el} 
                     className={selectedSize === el ? s.size_selected : s.size}

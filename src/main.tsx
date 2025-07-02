@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.scss'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './router'
+import { UserProvider } from './context/UserContext';
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </QueryClientProvider>
 )

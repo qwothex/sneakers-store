@@ -8,10 +8,17 @@ import { FaRegUser } from "react-icons/fa";
 import ThemeSwitcher from '../themeSwitcher/ThemeSwitcher';
 import { mainFilters } from '../../constants/mainFilters';
 import SideBar from '../sideBar/SideBar';
+import { useUser } from '../../context/UserContext';
 
 const NavBar:FC = () => {
 
   const navigate = useNavigate()
+
+  // const [searchParams, setSearchParams] = useSearchParams()
+
+  // const filters = searchParams.get('filters')?.split(',') || []
+
+  const { user } = useUser()
 
   return (
     <nav className={s.navbar}>
@@ -41,10 +48,10 @@ const NavBar:FC = () => {
             <GrFavorite size={'100%'} />
           </button>
         </div>
-        <button onClick={() => navigate('/cart')}>
+        <button onClick={() => navigate('/admin')}>
           <HiOutlineShoppingBag size={'100%'} />
         </button>
-        <button onClick={() => navigate('/admin')}>
+        <button onClick={() => navigate('/profile/' + user?.id)}>
           <FaRegUser size={'100%'} />
         </button>
       </div>

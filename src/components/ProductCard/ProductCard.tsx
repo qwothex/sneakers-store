@@ -1,6 +1,6 @@
 import { type FC } from 'react'
 import s from './productCard.module.scss'
-import type { ProductPreview } from '../../types/productEntry'
+import type { ProductPreview } from '../../types/product'
 import { useNavigate } from 'react-router-dom'
 import Price from '../Price/Price'
 
@@ -36,7 +36,7 @@ const ProductCard:FC<{product: ProductPreview}> = ({product}) => {
       <Price price={product.price} discount={product.discount || null} includeOriginalPriceText={true} />
 
       <h2>{product.name}</h2>
-      <h5>{product.manufacturer}</h5>
+      <h5>{product.seller_username}</h5>
       <button onClick={() => navigate('/product/' + product.id)}>More info</button>
     </div>
   )

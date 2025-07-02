@@ -1,0 +1,28 @@
+.popUp_container{
+  border-radius: 12px;
+  padding: 10px;
+  background-color: var(--plain-color);
+  color: var(--text-color);
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -150px);
+  z-index: 999;
+  animation: appear 4s;
+
+  h3{
+    margin: 5px 0;
+  }
+}
+
+@keyframes appear {
+  0%{
+    transform: translate(-50%, -150px);
+  }20%{
+    transform: translate(-50%, 100px);
+  }80%{
+    transform: translate(-50%, 100px);
+  }100%{
+    transform: translate(-50%, -150px);
+  }
+}

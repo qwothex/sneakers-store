@@ -1,9 +1,10 @@
 import { useState, type FC, type FormEvent } from 'react'
 import s from './admin.module.scss'
-import type { Filters } from '../../types/productEntry'
+import type { Filters } from '../../types/product'
 import NavBar from '../../components/Navbar/NavBar'
 import { mainFilters } from '../../constants/mainFilters'
 import { supabase } from '../../utils/supabase'
+import { useUser } from '../../context/UserContext'
 
 const Admin:FC = () => {
 
@@ -14,6 +15,8 @@ const Admin:FC = () => {
   const [model, setModel] = useState<File | null>(null)
   const [price, setPrice] = useState<string>('')
   const [customizable, setCustomizable] = useState<boolean>(false)
+
+  const { user } = useUser()
 
   const uploadModel = async () => { //execute under condition if(model)
     
@@ -37,8 +40,8 @@ const Admin:FC = () => {
       const imagePath = `${Date.now()}-${image.name}`
 
       const { error } = await supabase.storage
-        .from('product-images')
-        .upload(imagePath, image)
+        .from('images')
+        .upload('product-images/' + imagePath, image)
 
       if(error){
         console.error('Image upload error:', error.message);
@@ -46,8 +49,8 @@ const Admin:FC = () => {
       }
 
       const { data: urlData } = supabase.storage
-        .from('product-images')
-        .getPublicUrl(imagePath)
+        .from('images')
+        .getPublicUrl('product-images/' + imagePath)
 
       return urlData?.publicUrl ?? null;
     })
@@ -69,11 +72,12 @@ const Admin:FC = () => {
       customizable,
       price,
       filters,
-      model_url: modelUrl
+      model_url: modelUrl,
+      seller_username: user?.username
     }])
 
     if(data){
-      console.log('product ins res: ' + data);
+      console.log('product insert result: ' + data);
     }
 
     if(error){
