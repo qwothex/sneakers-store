@@ -9,6 +9,7 @@
   position: relative;
   background-color: var(--plain-color);
   box-sizing: border-box;
+  box-shadow: 2px 2px 0px 1px rgba($color: #646464, $alpha: 0.5);
   
   .labels{
     width: 100%;

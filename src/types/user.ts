@@ -3,10 +3,10 @@
 export type User = {
   id: string
   email: string
-  avatarUrl?: string
-  banner?: string
+  avatarUrl?: string | null
+  bannerUrl?: string | null
   description?: string
-  achievement?: string[]
+  achievements?: string[]
   sales: number
   username?: string
   admin: boolean

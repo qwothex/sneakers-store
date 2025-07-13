@@ -10,13 +10,18 @@ import NavBar from '../../components/Navbar/NavBar';
 import Footer from '../../components/Footer/Footer';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { useQuery } from '@tanstack/react-query';
+import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';
+import type { User } from '../../types/user';
+import bannerPlaceholder from '../../assets/images/banner_placeholder.webp'
+import pfpPlaceholder from '../../assets/images/pfp_placeholder.jpg'
 
 const UserPage:FC = () => {
 
   const navigate = useNavigate();
   const { user, setUser } = useUser()
 
-  const [popup, setPopup] = useState<boolean>(false)
+  const [popup, setPopup] = useState<{active: boolean, message: string}>({active: false, message: ''})
+  const [editing, setEditing] = useState<boolean>(false)
   const {userId} = useParams()
 
   useEffect(() => {
@@ -26,7 +31,7 @@ const UserPage:FC = () => {
     }
   }, [])
 
-  const isOwnProfile = userId == user?.id
+  const isOwnProfile = userId === user?.id
 
   const fetchUserData = async() => {
     const { data, error } = await supabase.from('users')
@@ -52,7 +57,7 @@ const UserPage:FC = () => {
     }
   }
 
-  const { data, isError, isLoading } = useQuery({
+  let { data, isError, isLoading }: {data: User | undefined, isError: boolean, isLoading: boolean} = useQuery({
     queryKey: ['user', userId],
     queryFn: fetchUserData
   })
@@ -65,27 +70,29 @@ const UserPage:FC = () => {
 
   // }
 
-  if(popup){
-    setTimeout(() => setPopup(false), 4000)
+  if(popup.active){
+    setTimeout(() => setPopup({active: false, message: ''}), 4000)
   }
+
+  if(isOwnProfile) data = user!
 
   return (
     <>
-    <NavBar />
-    {popup && <PopUp message='profile updated successfully.' />}
+    {editing && <EditProfileForm closeForm={() => setEditing(false)} callPopUp={(message) => setPopup({active: true, message})} /> }
+    {popup.active && <PopUp message={popup.message} />}
     <div className={s.profile_container}>
       <header>
-        <img alt='profile banner' width='100%' height='100%' src='https://www.mikereyfman.com/wp-content/gallery/panoramic-1-to-2-ratio/D1C7772-80_pano_bright.jpg' />
+        <img alt='profile banner' width='100%' height='100%' src={data?.bannerUrl ?? bannerPlaceholder} />
         {isOwnProfile && 
           <>
             <button className={s.logout_button} onClick={logout}><MdLogout /></button>
-            <button className={s.edit_button} onClick={() => setPopup(true)}><MdEdit /></button>
+            <button className={s.edit_button} onClick={() => setEditing(true)}><MdEdit /></button>
           </>
         }
       </header>
       <main>
         <section className={s.user_info}>
-          <img className={s.profile_picture} width={250} height={250} src={'https://www.mikereyfman.com/wp-content/gallery/panoramic-1-to-2-ratio/LF-MRD1E0616-27_Contrast_Crop_1x2_Lofoten-Archipelago.jpg'} /> {/* src={user?.avatarUrl} */}
+          <img className={s.profile_picture} width={250} height={250} src={data?.avatarUrl ?? pfpPlaceholder} />
           <div className={s.second_column}>
             <h2>{data?.username}</h2>
             <p>{data?.description || 'no description yet'}</p>
@@ -105,7 +112,6 @@ const UserPage:FC = () => {
         </section>
       </main>
     </div>
-    <Footer />
     </>
   )
 }

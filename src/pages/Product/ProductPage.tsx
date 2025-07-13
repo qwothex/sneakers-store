@@ -1,6 +1,5 @@
 import { useState, type FC } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import NavBar from "../../components/Navbar/NavBar"
 import s from './productPage.module.scss'
 import { supabase } from "../../utils/supabase"
 import { useQuery } from "@tanstack/react-query"
@@ -9,6 +8,7 @@ import Price from "../../components/Price/Price"
 import ErrorPage from "../ErrorPage/ErrorPage"
 import { priceWithDiscount } from "../../utils/priceWithDiscount"
 import LoadingScreen from "../Loading/LoadingScreen"
+import Slider from "../../components/Slider/Slider"
 
 const ProductPage:FC = () => {
 
@@ -53,12 +53,12 @@ const ProductPage:FC = () => {
 
   return(
 		<>
-      <NavBar />
 
       <main className={s.productPage}>
 
         <div className={s.image_container}>
-          <img src={product.images[0]} loading="lazy" alt="product image" />
+          {/* <img src={product.images[0]} alt="product image" /> */}
+          <Slider images={product.images} />
         </div>
 
         <section className={s.data}>
@@ -71,7 +71,7 @@ const ProductPage:FC = () => {
             </div>}
 
             <Link to={'/'} className={s.more}>more from {product.manufacturer}</Link>
-            <Link to={'/'} className={s.more}>more from {product.seller_username}</Link>
+            <Link to={'/profile/' + product.seller_id} className={s.more}>more from {product.seller_username}</Link>
 
             <ul className={s.filters}>
               {product.filters.map(el => <li key={el}>{el}</li>)}

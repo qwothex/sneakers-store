@@ -9,6 +9,7 @@
   transform: translate(-50%, -150px);
   z-index: 999;
   animation: appear 4s;
+  border: 1px solid var(--border-color);
 
   h3{
     margin: 5px 0;

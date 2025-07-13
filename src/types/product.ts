@@ -7,12 +7,10 @@ export type ProductPreview = {
   name: String,
   manufacturer: string,
   thumbnail: string, //link
-  modelUrl?: string, //link
   customizable: boolean,
   discount?: number,
   price: number, //USD
   filters: Filters[],
-  seller_id: string,
   seller_username: string,
 }
 
@@ -20,7 +18,7 @@ export type Product = {
   id: number,
   name: String,
   manufacturer: string,
-  images: string, //link
+  images: string[], //link
   modelUrl?: string //link,
   customizable: boolean,
   discount?: number,
@@ -29,4 +27,11 @@ export type Product = {
   filters: Filters[],
   seller_id: string,
   seller_username: string,
+}
+
+export type SearchProduct = {
+  id: number, 
+  name: string, 
+  manufacturer: string,
+  thumbnail: string //link
 }

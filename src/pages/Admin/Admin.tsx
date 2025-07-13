@@ -88,7 +88,6 @@ const Admin:FC = () => {
 
   return (
     <div className={s.admin_container}>
-      <NavBar />
       <form onSubmit={(e) => submit(e)}>
 
         <label htmlFor='name'>

@@ -1,7 +1,7 @@
 .productPage{
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 20px 20px 0;
   gap: 10px;
 
   @media (max-width: 900px) {
@@ -24,9 +24,8 @@
 
   .image_container{
     flex: 1;
-    aspect-ratio: 1/1;
     max-width: 700px;
-    max-height: 700px;
+    // min-height: 1200px;
     margin: 0 auto;
 
     @media (min-width: 1600px) {
@@ -126,6 +125,8 @@
       border-radius: 8px;
       background-image: url(/src/assets/images/environment.jpg);
       background-position: center;
+      font-size: 38px;
+      color: #fff;
     }
 
     select{

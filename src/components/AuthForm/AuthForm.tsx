@@ -26,6 +26,7 @@ const AuthForm:FC = () => {
 
   const submitForm: SubmitHandler<Inputs> = async(formData) => {
     setLoading(true)
+    setUserLoading(true)
     try{
       if(isLogin){
 
@@ -102,10 +103,10 @@ const AuthForm:FC = () => {
       }
     }catch(e){
       console.log(e)
+    }finally{
+      setLoading(false)
+      setUserLoading(false)
     }
-    // finally{
-    //   setLoading(false)
-    // }
 
   } 
 

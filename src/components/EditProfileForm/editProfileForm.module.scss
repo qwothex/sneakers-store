@@ -1,0 +1,60 @@
+
+// $text-color: var(--primary-color);
+// $primary-color: var(--text-color);
+
+.modal_wrapper{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0000009a;
+  z-index: 899;
+  display: grid;
+  place-items: center center;
+  color: var(--text-color);
+
+  form{
+    width: 50%;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border: 1px solid var(--text-color);
+    background-color: var(--primary-color);
+    border-radius: 12px;
+
+    button[type=button]{
+      width: 20px;
+      height: 20px;
+      border: none;
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      align-self: flex-end;
+      font-size: 20px;
+      padding: 0;
+    }
+
+    label{
+      margin-top: 20px;
+    }
+
+    textarea{
+      resize: none;
+      font-size: clamp(14px, 1.25vw, 22px);
+      font-family: sans-serif;
+    }
+
+    input[type=text]{
+      width: 200px;
+      height: 30px;
+      font-size: clamp(14px, 1.25vw, 22px);
+    }
+
+    button[type=submit]{
+      margin-top: 15px;
+      height: 35px;
+      font-size: 22px;
+    }
+  }
+}
