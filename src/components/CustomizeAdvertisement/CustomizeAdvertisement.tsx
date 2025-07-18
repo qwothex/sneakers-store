@@ -7,6 +7,8 @@ const CustomizeAdvertisement = () => {
       <img 
         src={animation} 
         alt='animation'
+        width={'100%'}
+        // height={'100%'}
       />
       <h2>Your Kicks - Your Canvas.</h2>
       <h3>

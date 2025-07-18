@@ -68,11 +68,12 @@
     }
 
     .searchInput{
-      width: 175px;
-      height: 30px;
+      width: 210px;
+      height: 32px;
       border: 1px solid var(--plain-color);
       border-radius: 8px;
-      padding-left: 35px;
+      padding: 0 35px;
+      box-sizing: border-box;
       font-size: 16px;
       background-color: var(--secondary-color);
       color: var(--text-color);
@@ -80,16 +81,12 @@
       &:focus{
         outline: none;
         border: 1px solid var(--text-color);
-
-        ~ ul{
-          display: block;
-        }
       };
 
     }
 
     ul{
-      display: none;
+      display: block;
       position: absolute;
       top: 55px;
       left: 50%;

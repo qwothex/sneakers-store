@@ -1,4 +1,4 @@
-import { useRef, useState, type FC } from 'react'
+import { useRef, type FC } from 'react'
 import s from './slider.module.scss'
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
@@ -29,7 +29,7 @@ const Slider:FC<{images: string[]}> = ({images}) => {
       <button className={s.button1} onClick={() => changeSlide(false)}><IoIosArrowBack size={40} /></button>
       <button className={s.button2} onClick={() => changeSlide(true)}><IoIosArrowForward size={40} /></button>
       <div ref={sliderContentRef} className={s.slider_content}>
-        {images.map(url => <img src={url} key={url} className={s.slide } />)}
+        {images.map(url => <img src={url} key={url} className={s.slide} />)}
       </div>
       <div className={s.preview}>
         {images.map((url, index) => <img onClick={() => jumpToSlide(index)} src={url} key={url} className={s.preview_tile} />)}

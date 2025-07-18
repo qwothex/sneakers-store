@@ -57,7 +57,6 @@ const ProductPage:FC = () => {
       <main className={s.productPage}>
 
         <div className={s.image_container}>
-          {/* <img src={product.images[0]} alt="product image" /> */}
           <Slider images={product.images} />
         </div>
 

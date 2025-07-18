@@ -8,6 +8,7 @@ import AuthPage from './pages/Auth/Auth'
 import UserPage from './pages/UserProfile/UserPage'
 import ProductList from './components/ProductsList/ProductsList'
 import NavLayout from './pages/NavLayout'
+import FilteredProducts from './pages/FilteredProducts/FilteredProducts'
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'product/:id/custom', element: <CustomizeSneakers /> },
       { path: 'admin', element: <Admin /> },
       { path: 'auth', element: <AuthPage /> },
+      { path: 'search', element: <FilteredProducts /> },
       {
         path: 'profile/:userId',
         element: <UserPage />,

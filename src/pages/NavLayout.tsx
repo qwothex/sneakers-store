@@ -64,8 +64,6 @@ const NavLayout:FC = () => {
         throw new Error('Error fetching search products: ' + error.message)
       }
 
-      console.log(data)
-
       setSearchProducts(data);
     }
 

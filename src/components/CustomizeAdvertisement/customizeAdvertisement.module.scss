@@ -1,23 +1,26 @@
 .customizeAd{
-  width: 70%;
-  max-width: 1000px;
+  // width: 70%;
+  // max-width: 1000px;
+  width: 100%;
   aspect-ratio: 6/3;
+  max-height: 500px;
   overflow: hidden;
   align-self: center;
   position: relative;
-  border: 1px solid var(--border-color);
-  border-radius: 24px;
+  // border: 1px solid var(--border-color);
+  // border-radius: 24px;
   display: flex;
   flex-direction: column;
   justify-content: end;
   padding: 0 25px 25px 25px;
   font-family: "Bebas Neue", sans-serif;
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5));
+  // background-image: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5));
+  background-color: #0000002f;
   // color: #fff;
 
-  @media(max-width: 900px){
-    width: auto;
-  }
+  // @media(max-width: 900px){
+  //   width: auto;
+  // }
 
   h2{
     font-size: clamp(1.75rem, 3vw, 2.5rem);
@@ -45,9 +48,9 @@
   }
   
   img{
-    width: 70%;
-    height: 70%;
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     position: absolute;
     bottom: 0;
     left: 50%;
