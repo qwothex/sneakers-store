@@ -1,7 +1,6 @@
 import { useState, type FC, type FormEvent } from 'react'
 import s from './admin.module.scss'
 import type { Filters } from '../../types/product'
-import NavBar from '../../components/Navbar/NavBar'
 import { mainFilters } from '../../constants/mainFilters'
 import { supabase } from '../../utils/supabase'
 import { useUser } from '../../context/UserContext'

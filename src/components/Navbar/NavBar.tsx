@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FC } from 'react'
 import s from './navBar.module.scss'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { CiSearch } from "react-icons/ci";
 import { SlArrowRightCircle } from "react-icons/sl";
 import { GrFavorite } from "react-icons/gr";
@@ -18,8 +18,6 @@ const NavBar:FC<{searchProducts: SearchProduct[]}> = ({searchProducts}) => {
 
   const navigate = useNavigate()
 
-  const [searchParams, setSearchParams] = useSearchParams()
-
   const [searchProductsCopy, setSearchProductsCopy] = useState<SearchProduct[]>(searchProducts)
   const [search, setSearch] = useState<string>('')
 
@@ -33,7 +31,6 @@ const NavBar:FC<{searchProducts: SearchProduct[]}> = ({searchProducts}) => {
         navigate('/product/' + product.id)
         setSearchModal(false)
         setSearch('')
-        setSearchParams({})
       }} key={product.id}>
         <img src={product.thumbnail} height='100%' />
         <h3>{product.name}</h3>

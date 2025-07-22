@@ -1,64 +1,84 @@
-import type { FC } from 'react'
+import { type FC } from 'react'
 import s from './filteredProducts.module.scss'
 import { useSearchParams } from 'react-router-dom'
-import { supabase } from '../../utils/supabase';
-import { useQuery } from '@tanstack/react-query';
 import ProductList from '../../components/ProductsList/ProductsList';
-import ProductCard from '../../components/ProductCard/ProductCard';
+import FiltersDropdown from '../../components/SearchFiltersDropdown/FiltersDropDown';
 
 const FilteredProducts:FC = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const category = searchParams.get('category')
+  const categories = searchParams.get('category')?.split(',')
   const query = searchParams.get('query')
-  const brand = searchParams.get('brand')
-
-  const fetchProducts = async() => {
-
-    let queryBuilder = supabase.from('products').select('*');
-
-    if (query) {
-      queryBuilder = queryBuilder.ilike('name', `%${query}%`);
-    }
-
-    if (brand) {
-      queryBuilder = queryBuilder.eq('manufacturer', brand);
-    }
-
-    if (category) {
-      queryBuilder = queryBuilder.contains('filters', [category]);
-    }
-
-    const { data, error } = await queryBuilder;
-
-    if(error){
-      console.log('error fetching filtered products: ' + error)
-    }
-
-    return data
-  }
-
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['filterProducts', brand, category, query],
-    queryFn: fetchProducts
-  })
-
-  if(isError){
-    console.log('error fetching products from tanstack')
-  }
+  const brands = searchParams.get('brand')?.split(',')
+  const order = searchParams.get('order')
 
   return (
     <div className={s.container}>
-      {/* <header>
-        
-      </header> */}
+      <header>
+        <h1>HEADER</h1>
+      </header>
       <main>
         <div className={s.sidebar}>
-
+          <ul className={s.list}>
+            <FiltersDropdown title='Categories' options={['men', 'women', 'customizable']} param='category' />
+            <FiltersDropdown title='Brands' options={['Nike', 'Adidas', 'New Balance', 'Asics', 'Dior']} param='brand' />
+            {/* <FiltersDropdown title='Price' options={['0-100$', '100-200$', '200-300$']} param='range' /> */}
+          </ul>
         </div>
-        <div>
-          {data && data.map(el => <ProductCard product={el} />)}
+        <div className={s.products}>
+          <div className={s.filters}>
+            <ul>
+              {query && 
+                <li>
+                  <button onClick={() => {searchParams.delete('query'), setSearchParams(searchParams)}}>
+                    {query}
+                  </button>
+                </li>
+              }
+              {brands && 
+                brands.map(brand => 
+                  <li key={brand}>
+                    <button onClick={() => {
+                      const newBrands = brands.filter(b => b !== brand).join(',')
+                      newBrands.length < 1 ? searchParams.delete('brand') : searchParams.set('brand', newBrands)
+                      setSearchParams(searchParams)
+                    }}>
+                      {brand}
+                    </button>
+                  </li>
+                )
+              }
+              {categories && 
+                categories.map(category => 
+                  <li key={category}>
+                    <button onClick={() => {
+                      const newCategories = categories.filter(b => b !== category).join(',')
+                      newCategories.length < 1 ? searchParams.delete('category') : searchParams.set('category', newCategories)
+                      setSearchParams(searchParams)
+                    }}>
+                      {category}
+                    </button>
+                  </li>
+                )
+              }
+            </ul>
+            <select value={order || ''} onChange={(e) => {
+              e.target.value ? searchParams.set('order', e.target.value) : searchParams.delete('order')
+              setSearchParams(searchParams)
+            }}>
+                <option value=''>
+                    Featured
+                </option>
+                <option value='asc'>
+                  Ascending
+                </option>
+                <option value='desc'>
+                  Descending
+                </option>
+            </select>
+          </div>
+          <ProductList filtered />
         </div>
       </main>
     </div>

@@ -6,44 +6,80 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import ProductCardLoader from '../ProductCard/ProductCardLoader';
 import type { FC } from 'react';
 
-const ProductList:FC = () => { 
+const ProductList:FC<{filtered?: boolean}> = ({filtered}) => { 
 
   const [searchParams, setSearchParams] = useSearchParams()
   const page = parseInt(searchParams.get('page') || '1')
 
+  const category = searchParams.get('category')?.split(',')
+  const query = searchParams.get('query')
+  const brand = searchParams.get('brand')?.split(',')
+  const order = searchParams.get('order')
+
   const {userId} = useParams()
 
-  const pageSize = 9;
+  const pageSize = 15;
 
   const fetchProducts = async (page: number) => {
 
     const from = (page - 1) * pageSize
     const to = from + pageSize - 1
 
-    const {data, error, count} = await (
-    userId
-      ? supabase.from('products')
-      .select('*', {count: 'exact'})
-      .eq('seller_id', userId)
-      .range(from, to)
+    let queryBuilder = supabase.from('products').select('*', {count: 'exact'})
 
-      : supabase.from('products')
-      .select('*', {count: 'exact'})
-      .range(from, to)
-    )
+    if(userId){
+      queryBuilder = queryBuilder.eq('seller_id', userId)
+    }
+
+    const {data, error, count} = await queryBuilder.range(from, to)
 
     if(error) console.log('error fetching the products: ' + error.message)
     
     return {data, count}
   }
 
+  const fetchFilteredProducts = async(page: number) => {
+
+    const from = (page - 1) * pageSize
+    const to = from + pageSize - 1
+
+    let queryBuilder = supabase.from('products').select('*', {count: 'exact'});
+
+    if (query) {
+      queryBuilder = queryBuilder.ilike('name', `%${query}%`);
+    }
+
+    if (brand) {
+      brand.length > 0
+      queryBuilder = queryBuilder.in('manufacturer', brand);
+    }
+
+    if (category) {
+      queryBuilder = queryBuilder.overlaps('filters', [...category]);
+    }
+
+    if(order){
+      queryBuilder.order('price', {ascending: order == 'asc'})
+    }
+
+    const { data, error, count } = await queryBuilder.range(from, to);
+
+    if(error){
+      console.log('error fetching filtered products: ' + error)
+    }
+
+    return {data, count}
+  }
+
   const goToPage = (page: number) => {
-    page > 0 && setSearchParams({ page: String(page)})
+    const params = new URLSearchParams(searchParams)
+    params.set("page", String(page))
+    page > 0 && setSearchParams(params)
   }
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['products', page, userId],
-    queryFn: () => fetchProducts(page),
+    queryKey: ['products', page, userId, category, brand, query, order],
+    queryFn: () => filtered ? fetchFilteredProducts(page) : fetchProducts(page),
     staleTime: 1000 * 60 * 5
   })
 

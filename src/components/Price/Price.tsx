@@ -7,7 +7,7 @@ const Price:FC<{price: number, discount: number | null, includeOriginalPriceText
   }
   return (
       <div className={s.discountedPrice}>
-        <h3>{(price - (discount / 100 * price)).toFixed()}$</h3>
+        <h3>{(price * (1 - discount / 100.0)).toFixed()}$</h3>
         {includeOriginalPriceText ? <h5>{price} original price -{discount}%</h5> : <></>}
       </div>
   )

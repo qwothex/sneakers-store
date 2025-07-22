@@ -6,8 +6,6 @@ import { MdLogout, MdEdit } from "react-icons/md";
 import { supabase } from '../../utils/supabase';
 import PopUp from '../../components/PopUp/PopUp';
 import LoadingScreen from '../Loading/LoadingScreen';
-import NavBar from '../../components/Navbar/NavBar';
-import Footer from '../../components/Footer/Footer';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { useQuery } from '@tanstack/react-query';
 import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';

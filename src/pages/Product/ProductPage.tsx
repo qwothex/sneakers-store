@@ -69,11 +69,11 @@ const ProductPage:FC = () => {
                 <span className={s.customizable_title}>CUSTOMIZABLE</span>
             </div>}
 
-            <Link to={'/'} className={s.more}>more from {product.manufacturer}</Link>
+            <Link to={'/search?brand=' + product.manufacturer} className={s.more}>more from {product.manufacturer}</Link>
             <Link to={'/profile/' + product.seller_id} className={s.more}>more from {product.seller_username}</Link>
 
             <ul className={s.filters}>
-              {product.filters.map(el => <li key={el}>{el}</li>)}
+              {product.filters.map(el => <li onClick={() => navigate('/search?category=' + el)} key={el}>{el}</li>)}
             </ul>
           </div>
 
