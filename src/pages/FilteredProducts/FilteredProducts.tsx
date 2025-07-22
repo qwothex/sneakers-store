@@ -2,7 +2,7 @@ import { type FC } from 'react'
 import s from './filteredProducts.module.scss'
 import { useSearchParams } from 'react-router-dom'
 import ProductList from '../../components/ProductsList/ProductsList';
-import FiltersDropdown from '../../components/SearchFiltersDropdown/FiltersDropDown';
+import FiltersDropdown from '../../components/FiltersDropdown/FiltersDropdown';
 
 const FilteredProducts:FC = () => {
 
