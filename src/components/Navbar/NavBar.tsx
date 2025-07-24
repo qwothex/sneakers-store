@@ -96,7 +96,7 @@ const NavBar:FC<{searchProducts: SearchProduct[]}> = ({searchProducts}) => {
             <GrFavorite size={'100%'} />
           </button>
         </div>
-        <button onClick={() => navigate('/admin')}>
+        <button onClick={() => navigate('/cart')}>
           <HiOutlineShoppingBag size={'100%'} />
         </button>
         <button onClick={() => navigate('/profile/' + user?.id)}>

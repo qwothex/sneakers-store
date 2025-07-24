@@ -18,7 +18,7 @@ const ProductList:FC<{filtered?: boolean}> = ({filtered}) => {
 
   const {userId} = useParams()
 
-  const pageSize = 15;
+  const pageSize = 10;
 
   const fetchProducts = async (page: number) => {
 
