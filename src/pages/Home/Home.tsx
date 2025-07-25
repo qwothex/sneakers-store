@@ -1,7 +1,7 @@
 import CustomizeAdvertisement from '../../components/CustomizeAdvertisement/CustomizeAdvertisement'
 // import Footer from '../../components/Footer/Footer'
 // import NavBar from '../../components/Navbar/NavBar'
-import ProductList from '../../components/ProductsList/ProductsList'
+// import ProductList from '../../components/ProductsList/ProductsList'
 // import { supabase } from '../../utils/supabase'
 // import LoadingScreen from '../Loading/LoadingScreen'
 import s from './home.module.scss'
@@ -24,7 +24,7 @@ const Home:FC = () => {
     <>
       <div className={s.mainPage}>
         <CustomizeAdvertisement />
-        <ProductList />
+        {/* <ProductList /> */}
       </div>
     </>
   )
