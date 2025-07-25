@@ -6,6 +6,12 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import ProductCardLoader from '../ProductCard/ProductCardLoader';
 import type { FC } from 'react';
 
+import { MdKeyboardDoubleArrowRight } from "react-icons/md"; //double right arrow
+import { MdKeyboardArrowRight } from "react-icons/md"; //single right arrow
+
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md"; //double left arrow
+import { MdKeyboardArrowLeft } from "react-icons/md"; //single left arrow
+
 const ProductList:FC<{filtered?: boolean}> = ({filtered}) => { 
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -18,7 +24,7 @@ const ProductList:FC<{filtered?: boolean}> = ({filtered}) => {
 
   const {userId} = useParams()
 
-  const pageSize = 10;
+  const pageSize = 12;
 
   const fetchProducts = async (page: number) => {
 
@@ -109,11 +115,16 @@ const ProductList:FC<{filtered?: boolean}> = ({filtered}) => {
         }
       </div>
       <div className={s.pageSwitcher}>
-        <button onClick={() => goToPage(page-1)} disabled={page == 1}>&lt;</button>
-        <div className={s.currentPage}>
-          {page}
+        <button onClick={() => goToPage(1)} disabled={page == 1}><MdKeyboardDoubleArrowLeft className={page == 1 && s.disabledIcon} /></button>
+        <button onClick={() => goToPage(page-1)} disabled={page == 1}><MdKeyboardArrowLeft className={page == 1 && s.disabledIcon} /></button>
+        <div className={s.pages}>
+          {page - 1 >= 1 && <span>{page - 1}</span>}
+          <span className={s.activePage}>{page}</span>
+          {page + 1 <= pagesCount && <span>{page + 1}</span>}
+          {page + 2 <= pagesCount && <span>{"..." + pagesCount}</span>}
         </div>
-        <button onClick={() => goToPage(page+1)} disabled={page == pagesCount}>&gt;</button>
+        <button onClick={() => goToPage(page+1)} disabled={page == pagesCount}><MdKeyboardArrowRight className={page == pagesCount && s.disabledIcon} /></button>
+        <button onClick={() => goToPage(pagesCount)} disabled={page == pagesCount}><MdKeyboardDoubleArrowRight className={page == pagesCount && s.disabledIcon} /></button>
       </div>
     </>
   )

@@ -78,8 +78,7 @@ const ProductPage:FC = () => {
           </div>
 
           <div className={s.price_container}>
-            <Price price={product.price} discount={product.discount || null} />
-            {product.discount && <span className={s.originalPrice}>{product.price}$</span>}
+            <Price price={product.price} discount={product.discount || null} includeOriginalPriceNumber />
             <p className={s.interestFree}>
               or 4 interest-free payments of {
               !product.discount 

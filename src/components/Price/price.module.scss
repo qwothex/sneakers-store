@@ -1,12 +1,22 @@
 .discountedPrice{
 
+    gap: 5px;
+    align-items: center;
+
     h3{
       color: rgb(255, 52, 52);
-      line-height: 0.9;
+      line-height: 1;
+      margin: 0;
     }
 
     h5{
       color: inherit;
+      margin: 0;
+    }
+
+    .originalPrice{
+      text-decoration: line-through;
+      font-size: 18px;
     }
 
   }

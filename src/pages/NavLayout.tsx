@@ -73,11 +73,11 @@ const NavLayout:FC = () => {
   if(loading) return <LoadingScreen />
 
   return (
-    <>
+    <div style={{maxWidth: 1440, margin: 'auto'}}>
       <NavBar searchProducts={searchProducts} />
       <Outlet />
       <Footer />
-    </>
+    </div>
   )
 }
 

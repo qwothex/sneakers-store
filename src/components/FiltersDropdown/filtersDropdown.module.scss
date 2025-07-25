@@ -22,6 +22,8 @@
       transition: .1s;
       font-size: 22px;
       text-align: start;
+      background-color: var(--primary-color);
+      color: var(--text-color);
 
       &:hover{
         background-color: var(--hover-color);
@@ -48,6 +50,8 @@
           background-color: var(--primary-color);
           text-align: start;
           padding-left: 20px;
+          background-color: var(--primary-color);
+          color: var(--text-color);
           
           &:hover{
             background-color: var(--hover-color);
